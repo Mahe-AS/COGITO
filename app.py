@@ -1,17 +1,15 @@
-from flask import Flask, request, jsonify, render_template
-import chat
+from flask import Flask, jsonify, requests
+import time
 
-app = Flask(__name__)
+app = Flask(_name_)
+@app.route("/bot",method=["POST"])
 
-@app.route('/')
-def homepage():
-    return render_template('index.html')
 
-@app.route('/chatbot', methods=['POST'])
-def chatbot():
-    message = request.get_json()['message']
-    response = chat.process_text(message)
-    return jsonify({'message': response})
 
-if __name__ == '__main__':
-    app.run(debug=True)
+def response():
+    query = dict(request.form)['query']
+    result = query + " " + time.ctime()
+    return jsonify({"response" : result})
+
+if _name_ == "_main_":
+    app.run(host="0.0.0.0")
